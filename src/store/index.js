@@ -38,8 +38,17 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    addTask(state, payload) {
+      state.tasks.push(payload);
+      console.log(state.tasks);
+    },
+  },
+  actions: {
+    addTask({ commit }, payload) {
+      commit('addTask', payload);
+    },
+  },
   getters: {
     getTasks(state) {
       return state.tasks;
