@@ -38,8 +38,16 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    deleteTask(state, payload) {
+      state.tasks = state.tasks.filter((task) => task.id !== payload);
+    },
+  },
+  actions: {
+    deleteTask({ commit }, payload) {
+      commit('deleteTask', payload);
+    },
+  },
   getters: {
     getTasks(state) {
       return state.tasks;

@@ -3,7 +3,7 @@
     <h2>{{ task.title }}</h2>
     <p>{{ task.descr }}</p>
     <span>{{ task.date }}</span>
-    <a class="tasks__close"></a>
+    <a @click.prevent="deleteTask" class="tasks__close"></a>
   </li>
 </template>
 
@@ -12,6 +12,12 @@ export default {
   props: {
     task: Object,
     default: () => {},
+  },
+  methods: {
+    deleteTask() {
+      const { id } = this.task;
+      this.$store.dispatch('deleteTask', id);
+    },
   },
 };
 </script>
