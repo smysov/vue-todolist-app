@@ -41,7 +41,6 @@ export default new Vuex.Store({
   mutations: {
     addTask(state, payload) {
       state.tasks.push(payload);
-      console.log(state.tasks);
     },
   },
   actions: {
