@@ -1,5 +1,5 @@
 <template>
-  <li class="tasks__item">
+  <li class="tasks__item" :class="[`tasks__item_${task.priority}`]">
     <h2>{{ task.title }}</h2>
     <p>{{ task.descr }}</p>
     <span>{{ task.date }}</span>
@@ -24,16 +24,25 @@ export default {
 
 <style lang="scss" scoped>
 .tasks__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 10px;
-  width: 100%;
-  padding: 20px 30px 10px 10px;
-  background-color: #fff;
-  box-shadow: 0 0 5px 0 #999999;
-  transition: all 0.3s;
+position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    width: 100%;
+    padding: 20px 30px 10px 10px;
+    box-shadow: 0 0 3px 3px #999999;
+    transition: all 0.3s;
+
+  &_low {
+    background-color: #fff;
+  }
+  &_medium {
+    background-color: #fdff96;
+  }
+  &_high {
+    background-color: #ffa391;
+  }
 
   &:hover {
     transform: translateY(-5px);
