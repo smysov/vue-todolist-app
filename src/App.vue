@@ -1,28 +1,71 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="wrapper">
+    <navigation />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import navigation from '@/components/Navigation.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-  },
+  components: { navigation },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  font-family: Georgia, Times, serif;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #e7e7e7;
+}
+
+a {
+  cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.wrapper__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  &_fixed {
+    margin-top: 40px;
+  }
+}
+
+.container {
+  width: 100%;
+  flex: 0 0 auto;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 10px;
+  @media screen and (min-width: 480px) {
+    padding: 0 15px;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 0 25px;
+  }
+  @media screen and (min-width: 1100px) {
+    padding: 0 35px;
+  }
 }
 </style>
