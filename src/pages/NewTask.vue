@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 <template>
   <div class="wrapper__content">
     <section class="section">
@@ -16,6 +15,7 @@
           <div class="add-task__group add-task__group_row">
             <div class="add-task__row">
               <input
+                v-model="task.priority"
                 class="add-task__radio"
                 type="radio"
                 name="priority"
@@ -26,6 +26,7 @@
             </div>
             <div class="add-task__row">
               <input
+                v-model="task.priority"
                 class="add-task__radio"
                 type="radio"
                 name="priority"
@@ -36,13 +37,14 @@
             </div>
             <div class="add-task__row">
               <input
+                v-model="task.priority"
                 class="add-task__radio"
                 type="radio"
                 name="priority"
-                id="High"
-                value="High"
+                id="high"
+                value="high"
               />
-              <label class="add-task__radio-title" for="High">High</label>
+              <label class="add-task__radio-title" for="high">High</label>
             </div>
           </div>
           <div class="add-task__group">
@@ -61,12 +63,13 @@ export default {
       task: {
         title: '',
         descr: '',
+        priority: 'low',
       },
     };
   },
   methods: {
     addTask() {
-      const { title, descr } = this.task;
+      const { title, descr, priority } = this.task;
       if (!title) {
         return;
       }
@@ -78,11 +81,16 @@ export default {
           .slice(2, 9),
         title,
         descr,
+        priority,
         date: new Date(Date.now()).toLocaleString(),
       });
 
       this.task.title = '';
       this.task.descr = '';
+      this.task.priority = false;
+    },
+    setPriority() {
+      return this.priorities[this.task.priority];
     },
   },
 };
