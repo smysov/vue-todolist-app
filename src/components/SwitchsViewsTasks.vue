@@ -48,10 +48,10 @@ export default {
   name: 'SwitchViewTasks',
   methods: {
     setGridClass(value) {
-      this.$store.commit('setColumn', value);
+      this.$store.dispatch('setColumn', value);
     },
     setColumnClass(value) {
-      this.$store.commit('setColumn', value);
+      this.$store.dispatch('setColumn', value);
     },
   },
   computed: {
