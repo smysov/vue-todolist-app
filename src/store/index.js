@@ -37,14 +37,17 @@ export default new Vuex.Store({
         date: new Date(Date.now()).toLocaleString(),
       },
     ],
+    column: false,
   },
   mutations: {
-
     addTask(state, payload) {
       state.tasks.push(payload);
     },
     deleteTask(state, payload) {
       state.tasks = state.tasks.filter((task) => task.id !== payload);
+    },
+    setColumn(state, payload) {
+      state.column = payload;
     },
   },
   actions: {
@@ -53,7 +56,10 @@ export default new Vuex.Store({
     },
     deleteTask({ commit }, payload) {
       commit('deleteTask', payload);
-},
+    },
+    setColumn({ commit }, payload) {
+      commit('setColumn', payload);
+    },
   },
   getters: {
     getTasks(state) {

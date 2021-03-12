@@ -2,8 +2,9 @@
   <div class="wrapper__content wrapper__content_fixed">
     <section class="section">
       <div class="container">
+        <header-task />
         <ul class="tasks">
-          <taskItem v-for="task of getTasks" :key="task.id" :task="task" />
+          <taskItem v-for="task of getTasks" :key="task.id" v-bind="{ task }" />
         </ul>
       </div>
     </section>
@@ -12,14 +13,10 @@
 
 <script>
 import taskItem from '@/components/TaskItem.vue';
+import headerTask from '@/components/HeaderTask.vue';
 
 export default {
-  components: { taskItem },
-  data() {
-    return {
-      tasks: null,
-    };
-  },
+  components: { taskItem, headerTask },
   computed: {
     getTasks() {
       return this.$store.getters.getTasks;
