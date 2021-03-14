@@ -44,19 +44,29 @@ export default new Vuex.Store({
     },
     column: false,
     search: '',
+    messageError: '',
+    messageNotFoundTask: 'No tasks',
   },
   mutations: {
     ADD_TASK({ tasks }, payload) {
       tasks.push(payload);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
     },
     DELETE_TASK(state, payload) {
       state.tasks = state.tasks.filter((task) => task.id !== payload);
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     CHANGE_CLASS_TASK(state, payload) {
       state.column = payload;
     },
     SET_SEARCH(state, payload) {
       state.search = payload;
+    },
+    SET_MESSAGE_FORM(state) {
+      state.messageError = "Title can't be blank";
+    },
+    DELETE_MESSAGE_FORM(state) {
+      state.messageError = '';
     },
   },
   actions: {
@@ -72,6 +82,12 @@ export default new Vuex.Store({
     setSearch({ commit }, payload) {
       commit('SET_SEARCH', payload);
     },
+    setMessageForm({ commit }) {
+      commit('SET_MESSAGE_FORM');
+    },
+    deleteMessageForm({ commit }) {
+      commit('DELETE_MESSAGE_FORM');
+    },
   },
   getters: {
     getTask({ task }) {
@@ -81,12 +97,18 @@ export default new Vuex.Store({
       return search;
     },
     getFilteredTasks({ tasks, search }) {
-      if (!search) return tasks;
+      if (!search) return JSON.parse(localStorage.getItem('tasks')) || tasks;
       const searchLowerCase = search.trim().toLocaleLowerCase();
       const filteredTasks = tasks.filter(
         (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
       );
       return filteredTasks;
+    },
+    getMessage({ messageError }) {
+      return messageError;
+    },
+    getMessageTasks({ messageNotFoundTask }) {
+      return messageNotFoundTask;
     },
   },
 });

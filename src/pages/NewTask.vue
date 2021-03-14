@@ -3,6 +3,9 @@
     <section class="section">
       <div class="container">
         <form novalidate autocomplete="off" class="add-task" @submit.prevent="addTask">
+          <div class="error">
+            <p class="message">{{ message }}</p>
+          </div>
           <div class="add-task__group">
             <input type="text" id="title" required="" v-model="task.title" />
             <label class="add-task__title" for="title">Title</label>
@@ -62,11 +65,15 @@ export default {
     task() {
       return this.$store.getters.getTask;
     },
+    message() {
+      return this.$store.getters.getMessage;
+    },
   },
   methods: {
     addTask() {
       const { title, descr, priority } = this.task;
       if (!title) {
+        this.$store.dispatch('setMessageForm');
         return;
       }
 
@@ -83,6 +90,7 @@ export default {
 
       this.task.title = '';
       this.task.descr = '';
+      this.$store.dispatch('deleteMessageForm');
       this.task.priority = false;
     },
   },
@@ -96,12 +104,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-.message {
-  color: crimson;
-  text-align: center;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+
 .add-task {
   display: flex;
   flex-direction: column;
@@ -288,5 +291,9 @@ p {
   @media (min-width: 1100px) {
     font-size: 24px;
   }
+}
+
+.message {
+  color: crimson;
 }
 </style>

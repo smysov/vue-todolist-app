@@ -3,9 +3,10 @@
     <section class="section">
       <div class="container">
         <header-task />
-        <ul class="tasks">
-          <taskItem v-for="task of getTasks" :key="task.id" v-bind="{ task }" />
+        <ul class="tasks" v-if="tasks.length">
+          <taskItem v-for="task of tasks" :key="task.id" v-bind="{ task }" />
         </ul>
+        <p v-else>{{ messageNoTasks }}</p>
       </div>
     </section>
   </div>
@@ -18,8 +19,11 @@ import headerTask from '@/components/HeaderTask.vue';
 export default {
   components: { taskItem, headerTask },
   computed: {
-    getTasks() {
+    tasks() {
       return this.$store.getters.getFilteredTasks;
+    },
+    messageNoTasks() {
+      return this.$store.getters.getMessageTasks;
     },
   },
 };
