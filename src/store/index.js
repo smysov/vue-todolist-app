@@ -37,38 +37,59 @@ export default new Vuex.Store({
         date: new Date(Date.now()).toLocaleString(),
       },
     ],
+    task: {
+      title: '',
+      descr: '',
+      priority: 'low',
+    },
     column: false,
     search: '',
+    messageError: '',
   },
   mutations: {
-    addTask(state, payload) {
-      state.tasks.push(payload);
+    ADD_TASK({ tasks }, payload) {
+      tasks.push(payload);
     },
-    deleteTask(state, payload) {
+    DELETE_TASK(state, payload) {
       state.tasks = state.tasks.filter((task) => task.id !== payload);
     },
-    setColumn(state, payload) {
+    CHANGE_CLASS_TASK(state, payload) {
       state.column = payload;
     },
-    setSearch(state, payload) {
+    SET_SEARCH(state, payload) {
       state.search = payload;
+    },
+    SET_MESSAGE_FORM(state) {
+      state.messageError = "Title can't be blank";
+    },
+    DELETE_MESSAGE_FORM(state) {
+      state.messageError = '';
     },
   },
   actions: {
     addTask({ commit }, payload) {
-      commit('addTask', payload);
+      commit('ADD_TASK', payload);
     },
     deleteTask({ commit }, payload) {
-      commit('deleteTask', payload);
+      commit('DELETE_TASK', payload);
     },
     setColumn({ commit }, payload) {
-      commit('setColumn', payload);
+      commit('CHANGE_CLASS_TASK', payload);
     },
     setSearch({ commit }, payload) {
-      commit('setSearch', payload);
+      commit('SET_SEARCH', payload);
+    },
+    setMessageForm({ commit }) {
+      commit('SET_MESSAGE_FORM');
+    },
+    deleteMessageForm({ commit }) {
+      commit('DELETE_MESSAGE_FORM');
     },
   },
   getters: {
+    getTask({ task }) {
+      return task;
+    },
     getSearch({ search }) {
       return search;
     },
@@ -79,6 +100,9 @@ export default new Vuex.Store({
         (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
       );
       return filteredTasks;
+    },
+    getMessage({ messageError }) {
+      return messageError;
     },
   },
 });

@@ -3,6 +3,9 @@
     <section class="section">
       <div class="container">
         <form novalidate autocomplete="off" class="add-task" @submit.prevent="addTask">
+          <div class="error">
+            <p class="message">{{ message }}</p>
+          </div>
           <div class="add-task__group">
             <input type="text" id="title" required="" v-model="task.title" />
             <label class="add-task__title" for="title">Title</label>
@@ -58,19 +61,19 @@
 
 <script>
 export default {
-  data() {
-    return {
-      task: {
-        title: '',
-        descr: '',
-        priority: 'low',
-      },
-    };
+  computed: {
+    task() {
+      return this.$store.getters.getTask;
+    },
+    message() {
+      return this.$store.getters.getMessage;
+    },
   },
   methods: {
     addTask() {
       const { title, descr, priority } = this.task;
       if (!title) {
+        this.$store.dispatch('setMessageForm');
         return;
       }
 
@@ -87,10 +90,8 @@ export default {
 
       this.task.title = '';
       this.task.descr = '';
+      this.$store.dispatch('deleteMessageForm');
       this.task.priority = false;
-    },
-    setPriority() {
-      return this.priorities[this.task.priority];
     },
   },
 };
@@ -103,12 +104,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-.message {
-  color: crimson;
-  text-align: center;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+
 .add-task {
   display: flex;
   flex-direction: column;
@@ -142,9 +138,10 @@ export default {
   }
   &__title {
     position: absolute;
-    top: -5px;
+    top: -3px;
     font-size: 18px;
     font-weight: 500;
+    color: #5a5a5a;
     pointer-events: none;
     transition: 0.5s;
     text-transform: uppercase;
@@ -206,6 +203,13 @@ export default {
     position: relative;
     padding-left: 30px;
     cursor: pointer;
+
+    @media (min-width: 480px) {
+      font-size: 20px;
+    }
+    @media (min-width: 768px) {
+      font-size: 22px;
+    }
     &::before {
       content: '';
       position: absolute;
@@ -214,6 +218,14 @@ export default {
       height: 20px;
       border: 2px solid #8b6f0a;
       border-radius: 50%;
+
+      @media (min-width: 480px) {
+        top: 2px;
+      }
+
+      @media (min-width: 768px) {
+        top: 4px;
+      }
     }
     &::after {
       content: '';
@@ -226,6 +238,12 @@ export default {
       background-color: #8b6f0a;
       transform: scale(0);
       transition: 0.5s;
+      @media (min-width: 480px) {
+        top: 7px;
+      }
+      @media (min-width: 768px) {
+        top: 9px;
+      }
     }
   }
   &__radio:checked + .add-task__radio-title::after {
@@ -234,11 +252,20 @@ export default {
 }
 input,
 textarea {
+  font-size: 20px;
+  padding: 5px 0 3px 10px;
   border: none;
-  padding: 0 0 3px 10px;
   border-bottom: 2px solid #c5c4c4;
   outline: none;
   background-color: transparent;
+
+  @media (min-width: 480px) {
+    font-size: 22px;
+  }
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
+
   &:focus,
   &:valid {
     border-color: #8b6f0a;
@@ -249,12 +276,14 @@ textarea {
 }
 textarea {
   resize: none;
+  max-height: 40px;
 }
 
 p {
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 1.2px;
+  color: #5a5a5a;
 
   @media (min-width: 768px) {
     font-size: 22px;
@@ -262,5 +291,9 @@ p {
   @media (min-width: 1100px) {
     font-size: 24px;
   }
+}
+
+.message {
+  color: crimson;
 }
 </style>
