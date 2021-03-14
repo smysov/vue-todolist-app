@@ -135,9 +135,10 @@ export default {
   }
   &__title {
     position: absolute;
-    top: -5px;
+    top: -3px;
     font-size: 18px;
     font-weight: 500;
+    color: #5a5a5a;
     pointer-events: none;
     transition: 0.5s;
     text-transform: uppercase;
@@ -199,6 +200,13 @@ export default {
     position: relative;
     padding-left: 30px;
     cursor: pointer;
+
+    @media (min-width: 480px) {
+      font-size: 20px;
+    }
+    @media (min-width: 768px) {
+      font-size: 22px;
+    }
     &::before {
       content: '';
       position: absolute;
@@ -207,6 +215,14 @@ export default {
       height: 20px;
       border: 2px solid #8b6f0a;
       border-radius: 50%;
+
+      @media (min-width: 480px) {
+        top: 2px;
+      }
+
+      @media (min-width: 768px) {
+        top: 4px;
+      }
     }
     &::after {
       content: '';
@@ -219,6 +235,12 @@ export default {
       background-color: #8b6f0a;
       transform: scale(0);
       transition: 0.5s;
+      @media (min-width: 480px) {
+        top: 7px;
+      }
+      @media (min-width: 768px) {
+        top: 9px;
+      }
     }
   }
   &__radio:checked + .add-task__radio-title::after {
@@ -227,11 +249,20 @@ export default {
 }
 input,
 textarea {
+  font-size: 20px;
+  padding: 5px 0 3px 10px;
   border: none;
-  padding: 0 0 3px 10px;
   border-bottom: 2px solid #c5c4c4;
   outline: none;
   background-color: transparent;
+
+  @media (min-width: 480px) {
+    font-size: 22px;
+  }
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
+
   &:focus,
   &:valid {
     border-color: #8b6f0a;
@@ -242,12 +273,14 @@ textarea {
 }
 textarea {
   resize: none;
+  max-height: 40px;
 }
 
 p {
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 1.2px;
+  color: #5a5a5a;
 
   @media (min-width: 768px) {
     font-size: 22px;
