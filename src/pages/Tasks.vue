@@ -19,7 +19,7 @@ export default {
   components: { taskItem, headerTask },
   computed: {
     getTasks() {
-      return this.$store.getters.getTasks;
+      return this.$store.getters.getFilteredTasks;
     },
   },
 };

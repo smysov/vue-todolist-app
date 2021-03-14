@@ -1,15 +1,21 @@
 <template>
   <div class="header-tasks">
-    <h1>Tasks</h1>
+    <search :value="getSearch" @search="getSearch = $event" />
     <switchsViewsTasks />
   </div>
 </template>
 
 <script>
 import switchsViewsTasks from './SwitchsViewsTasks.vue';
+import search from './Search.vue';
 
 export default {
-  components: { switchsViewsTasks },
+  components: { switchsViewsTasks, search },
+  computed: {
+    getSearch() {
+      return this.$store.getters.getSearch;
+    },
+  },
 };
 </script>
 
@@ -18,6 +24,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 </style>

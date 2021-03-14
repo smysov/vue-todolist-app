@@ -38,6 +38,7 @@ export default new Vuex.Store({
       },
     ],
     column: false,
+    search: '',
   },
   mutations: {
     addTask(state, payload) {
@@ -48,6 +49,9 @@ export default new Vuex.Store({
     },
     setColumn(state, payload) {
       state.column = payload;
+    },
+    setSearch(state, payload) {
+      state.search = payload;
     },
   },
   actions: {
@@ -60,10 +64,21 @@ export default new Vuex.Store({
     setColumn({ commit }, payload) {
       commit('setColumn', payload);
     },
+    setSearch({ commit }, payload) {
+      commit('setSearch', payload);
+    },
   },
   getters: {
-    getTasks(state) {
-      return state.tasks;
+    getSearch({ search }) {
+      return search;
+    },
+    getFilteredTasks({ tasks, search }) {
+      if (!search) return tasks;
+      const searchLowerCase = search.trim().toLocaleLowerCase();
+      const filteredTasks = tasks.filter(
+        (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
+      );
+      return filteredTasks;
     },
   },
 });
