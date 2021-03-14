@@ -38,6 +38,10 @@ export default {
     height: 15px;
     border: 1px solid #a3a3a3;
     border-radius: 50%;
+
+    @media (min-width: 480px) {
+      top: 8px;
+    }
   }
 
   &::after {
@@ -49,6 +53,10 @@ export default {
     height: 1px;
     background-color: #a3a3a3;
     transform: rotate(45deg);
+
+    @media (min-width: 480px) {
+      top: 23px;
+    }
   }
 
   &__input {
@@ -63,6 +71,8 @@ export default {
 
     @media (min-width: 480px) {
       max-width: 220px;
+      padding: 7px 7px 7px 32px;
+      border-width: 2px;
     }
 
     &:focus {
