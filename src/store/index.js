@@ -37,14 +37,21 @@ export default new Vuex.Store({
         date: new Date(Date.now()).toLocaleString(),
       },
     ],
+    column: false,
+    search: '',
   },
   mutations: {
-
     addTask(state, payload) {
       state.tasks.push(payload);
     },
     deleteTask(state, payload) {
       state.tasks = state.tasks.filter((task) => task.id !== payload);
+    },
+    setColumn(state, payload) {
+      state.column = payload;
+    },
+    setSearch(state, payload) {
+      state.search = payload;
     },
   },
   actions: {
@@ -53,11 +60,25 @@ export default new Vuex.Store({
     },
     deleteTask({ commit }, payload) {
       commit('deleteTask', payload);
-},
+    },
+    setColumn({ commit }, payload) {
+      commit('setColumn', payload);
+    },
+    setSearch({ commit }, payload) {
+      commit('setSearch', payload);
+    },
   },
   getters: {
-    getTasks(state) {
-      return state.tasks;
+    getSearch({ search }) {
+      return search;
+    },
+    getFilteredTasks({ tasks, search }) {
+      if (!search) return tasks;
+      const searchLowerCase = search.trim().toLocaleLowerCase();
+      const filteredTasks = tasks.filter(
+        (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
+      );
+      return filteredTasks;
     },
   },
 });
