@@ -58,14 +58,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      task: {
-        title: '',
-        descr: '',
-        priority: 'low',
-      },
-    };
+  computed: {
+    task() {
+      return this.$store.getters.getTask;
+    },
   },
   methods: {
     addTask() {
@@ -88,9 +84,6 @@ export default {
       this.task.title = '';
       this.task.descr = '';
       this.task.priority = false;
-    },
-    setPriority() {
-      return this.priorities[this.task.priority];
     },
   },
 };

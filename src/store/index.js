@@ -37,6 +37,11 @@ export default new Vuex.Store({
         date: new Date(Date.now()).toLocaleString(),
       },
     ],
+    task: {
+      title: '',
+      descr: '',
+      priority: 'low',
+    },
     column: false,
     search: '',
   },
@@ -69,6 +74,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    getTask({ task }) {
+      return task;
+    },
     getSearch({ search }) {
       return search;
     },
