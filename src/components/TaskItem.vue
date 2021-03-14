@@ -1,5 +1,8 @@
 <template>
-  <li class="tasks__item" :class="[`tasks__item_${task.priority}`]">
+  <li
+    class="tasks__item"
+    :class="[`tasks__item_${task.priority}`, { column: changeClass }]"
+  >
     <h2>{{ task.title }}</h2>
     <p>{{ task.descr }}</p>
     <span>{{ task.date }}</span>
@@ -10,8 +13,12 @@
 <script>
 export default {
   props: {
-    task: Object,
-    default: () => {},
+    task: { type: Object, default: () => {} },
+  },
+  computed: {
+    changeClass() {
+      return this.$store.state.column;
+    },
   },
   methods: {
     deleteTask() {
@@ -24,15 +31,15 @@ export default {
 
 <style lang="scss" scoped>
 .tasks__item {
-position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-    width: 100%;
-    padding: 20px 30px 10px 10px;
-    box-shadow: 0 0 3px 3px #999999;
-    transition: all 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  width: 100%;
+  padding: 20px 30px 10px 10px;
+  box-shadow: 0 0 3px 3px #999999;
+  transition: all 0.3s;
 
   &_low {
     background-color: #fff;
