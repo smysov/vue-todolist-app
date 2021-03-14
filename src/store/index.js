@@ -44,6 +44,7 @@ export default new Vuex.Store({
     },
     column: false,
     search: '',
+    messageError: '',
   },
   mutations: {
     ADD_TASK({ tasks }, payload) {
@@ -58,6 +59,12 @@ export default new Vuex.Store({
     SET_SEARCH(state, payload) {
       state.search = payload;
     },
+    SET_MESSAGE_FORM(state) {
+      state.messageError = "Title can't be blank";
+    },
+    DELETE_MESSAGE_FORM(state) {
+      state.messageError = '';
+    },
   },
   actions: {
     addTask({ commit }, payload) {
@@ -71,6 +78,12 @@ export default new Vuex.Store({
     },
     setSearch({ commit }, payload) {
       commit('SET_SEARCH', payload);
+    },
+    setMessageForm({ commit }) {
+      commit('SET_MESSAGE_FORM');
+    },
+    deleteMessageForm({ commit }) {
+      commit('DELETE_MESSAGE_FORM');
     },
   },
   getters: {
@@ -87,6 +100,9 @@ export default new Vuex.Store({
         (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
       );
       return filteredTasks;
+    },
+    getMessage({ messageError }) {
+      return messageError;
     },
   },
 });
