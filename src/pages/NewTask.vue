@@ -91,7 +91,7 @@ export default {
       this.task.title = '';
       this.task.descr = '';
       this.$store.dispatch('deleteMessageForm');
-      this.task.priority = false;
+      this.task.priority = 'low';
     },
   },
 };
