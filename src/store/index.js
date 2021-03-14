@@ -45,6 +45,7 @@ export default new Vuex.Store({
     column: false,
     search: '',
     messageError: '',
+    messageNotFoundTask: 'No tasks',
   },
   mutations: {
     ADD_TASK({ tasks }, payload) {
@@ -103,6 +104,9 @@ export default new Vuex.Store({
     },
     getMessage({ messageError }) {
       return messageError;
+    },
+    getMessageTasks({ messageNotFoundTask }) {
+      return messageNotFoundTask;
     },
   },
 });
