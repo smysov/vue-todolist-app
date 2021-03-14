@@ -37,38 +37,46 @@ export default new Vuex.Store({
         date: new Date(Date.now()).toLocaleString(),
       },
     ],
+    task: {
+      title: '',
+      descr: '',
+      priority: 'low',
+    },
     column: false,
     search: '',
   },
   mutations: {
-    addTask(state, payload) {
-      state.tasks.push(payload);
+    ADD_TASK({ tasks }, payload) {
+      tasks.push(payload);
     },
-    deleteTask(state, payload) {
+    DELETE_TASK(state, payload) {
       state.tasks = state.tasks.filter((task) => task.id !== payload);
     },
-    setColumn(state, payload) {
+    CHANGE_CLASS_TASK(state, payload) {
       state.column = payload;
     },
-    setSearch(state, payload) {
+    SET_SEARCH(state, payload) {
       state.search = payload;
     },
   },
   actions: {
     addTask({ commit }, payload) {
-      commit('addTask', payload);
+      commit('ADD_TASK', payload);
     },
     deleteTask({ commit }, payload) {
-      commit('deleteTask', payload);
+      commit('DELETE_TASK', payload);
     },
     setColumn({ commit }, payload) {
-      commit('setColumn', payload);
+      commit('CHANGE_CLASS_TASK', payload);
     },
     setSearch({ commit }, payload) {
-      commit('setSearch', payload);
+      commit('SET_SEARCH', payload);
     },
   },
   getters: {
+    getTask({ task }) {
+      return task;
+    },
     getSearch({ search }) {
       return search;
     },

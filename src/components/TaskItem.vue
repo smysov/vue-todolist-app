@@ -44,16 +44,27 @@ export default {
   &_low {
     background-color: #fff;
   }
+
   &_medium {
     background-color: #fdff96;
+
+    span {
+      color: #747474;
+    }
   }
+
   &_high {
     background-color: #ffa391;
+
+    span {
+      color: #747474;
+    }
   }
 
   &:hover {
     transform: translateY(-5px);
   }
+
   &.column {
     width: 48%;
     align-items: flex-start;

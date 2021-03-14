@@ -60,7 +60,7 @@ header {
   &__logo {
     font-weight: 700;
     text-transform: uppercase;
-    color: #be974e;
+    color: #be9446;
 
     @media (min-width: 480px) {
       font-size: 20px;
@@ -81,10 +81,10 @@ header {
   &__link {
     text-transform: uppercase;
     transition: 0.3s all;
-    color: #ffb639;
+    color: #a17728;
 
     &:hover {
-      color: #ffcc7b;
+      color: #c59d5c;
     }
   }
 
@@ -95,7 +95,7 @@ header {
     &::before {
       position: absolute;
       bottom: -3px;
-      content: "";
+      content: '';
       width: 100%;
       height: 3px;
       background-color: #dac226;
