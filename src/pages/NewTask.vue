@@ -91,7 +91,7 @@ export default {
       this.task.title = '';
       this.task.descr = '';
       this.$store.dispatch('deleteMessageForm');
-      this.task.priority = false;
+      this.task.priority = 'low';
     },
   },
 };
@@ -102,7 +102,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 .add-task {
