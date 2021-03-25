@@ -3,9 +3,9 @@
     <section class="section">
       <div class="container">
         <header-task />
-        <ul class="tasks" v-if="tasks.length">
+        <transition-group name="list" class="tasks" v-if="tasks.length" tag="ul">
           <taskItem v-for="task of tasks" :key="task.id" v-bind="{ task }" />
-        </ul>
+        </transition-group>
         <p v-else>{{ messageNoTasks }}</p>
       </div>
     </section>
@@ -77,5 +77,13 @@ p {
   text-align: center;
   color: #999999;
   font-style: italic;
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all .5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

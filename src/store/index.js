@@ -11,28 +11,8 @@ export default new Vuex.Store({
           .toString(32)
           .toLowerCase()
           .slice(2, 9),
-        title: 'Title of first note',
-        descr: 'Description of first note',
-        priority: 'low',
-        date: new Date(Date.now()).toLocaleString(),
-      },
-      {
-        id: Math.random()
-          .toString(32)
-          .toLowerCase()
-          .slice(2, 9),
-        title: 'Title of second note',
-        descr: 'Description of second note',
-        priority: 'low',
-        date: new Date(Date.now()).toLocaleString(),
-      },
-      {
-        id: Math.random()
-          .toString(32)
-          .toLowerCase()
-          .slice(2, 9),
-        title: 'Title of third note',
-        descr: 'Description of third note',
+        title: 'Title of test task',
+        descr: 'Description of test task',
         priority: 'low',
         date: new Date(Date.now()).toLocaleString(),
       },
