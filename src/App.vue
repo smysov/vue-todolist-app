@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
     <navigation />
-    <router-view></router-view>
+    <transition name="opacity">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -45,7 +47,7 @@ a {
 .wrapper__content {
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 85vh;
   &_fixed {
     margin-top: 40px;
   }
@@ -67,5 +69,33 @@ a {
   @media screen and (min-width: 1100px) {
     padding: 0 35px;
   }
+}
+
+.opacity-enter-from {
+  opacity: 0;
+  transform: translateX(-10%);
+}
+
+.opacity-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.opacity-enter-active {
+  transition: all .5s linear;
+}
+
+.opacity-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.opacity-leave-to {
+  opacity: 0;
+  transform: translateX(-10%);
+}
+
+.opacity-leave-active {
+  transition: all .5s linear;
 }
 </style>
