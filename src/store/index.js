@@ -11,28 +11,8 @@ export default new Vuex.Store({
           .toString(32)
           .toLowerCase()
           .slice(2, 9),
-        title: 'Title of first note',
-        descr: 'Description of first note',
-        priority: 'low',
-        date: new Date(Date.now()).toLocaleString(),
-      },
-      {
-        id: Math.random()
-          .toString(32)
-          .toLowerCase()
-          .slice(2, 9),
-        title: 'Title of second note',
-        descr: 'Description of second note',
-        priority: 'low',
-        date: new Date(Date.now()).toLocaleString(),
-      },
-      {
-        id: Math.random()
-          .toString(32)
-          .toLowerCase()
-          .slice(2, 9),
-        title: 'Title of third note',
-        descr: 'Description of third note',
+        title: 'Title of test task',
+        descr: 'Description of test task',
         priority: 'low',
         date: new Date(Date.now()).toLocaleString(),
       },
@@ -50,11 +30,9 @@ export default new Vuex.Store({
   mutations: {
     ADD_TASK({ tasks }, payload) {
       tasks.push(payload);
-      localStorage.setItem('tasks', JSON.stringify(tasks));
     },
     DELETE_TASK(state, payload) {
-      state.tasks = state.tasks.filter((task) => task.id !== payload);
-      localStorage.setItem('tasks', JSON.stringify(state.tasks));
+      state.tasks.splice(payload, 1);
     },
     CHANGE_CLASS_TASK(state, payload) {
       state.column = payload;
@@ -73,8 +51,9 @@ export default new Vuex.Store({
     addTask({ commit }, payload) {
       commit('ADD_TASK', payload);
     },
-    deleteTask({ commit }, payload) {
-      commit('DELETE_TASK', payload);
+    deleteTask({ commit, state }, payload) {
+      const index = state.tasks.findIndex((task) => task.id === payload);
+      commit('DELETE_TASK', index);
     },
     setColumn({ commit }, payload) {
       commit('CHANGE_CLASS_TASK', payload);
@@ -97,7 +76,7 @@ export default new Vuex.Store({
       return search;
     },
     getFilteredTasks({ tasks, search }) {
-      if (!search) return JSON.parse(localStorage.getItem('tasks')) || tasks;
+      if (!search) return tasks;
       const searchLowerCase = search.trim().toLocaleLowerCase();
       const filteredTasks = tasks.filter(
         (task) => task.title.toLocaleLowerCase().indexOf(searchLowerCase) !== -1,
